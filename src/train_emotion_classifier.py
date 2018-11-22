@@ -65,7 +65,6 @@ for dataset_name in datasets:
     num_samples, num_classes = emotions.shape
     train_data, val_data = split_data(faces, emotions, validation_split)
     train_faces, train_emotions = train_data
-    model.compile(loss='mse', optimizer='adam')
     model.fit_generator(data_generator.flow(train_faces, train_emotions,
                                             batch_size),
                         steps_per_epoch=len(train_faces) / batch_size,
