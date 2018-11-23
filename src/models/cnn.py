@@ -95,13 +95,16 @@ def mini_XCEPTION(input_shape, num_classes, l2_regularization=0.01):
 
     x = MaxPooling2D((3, 3), strides=(2, 2), padding='same')(x)
     x = layers.add([x, residual])
-
+    # module 5
     x = Conv2D(256, (3, 3),
                kernel_regularizer=regularization,
                padding='same')(x)
-
-    x = Dense(num_classes, activation='relu', use_bias=False)(x)
+    x = BatchNormalization()(x)
     x = GlobalAveragePooling2D()(x)
+    x = Dense(128, activation='relu', use_bias=False)(x)
+    x = Dense(64, activation='relu', use_bias=False)(x)
+    x = Dense(32, activation='relu', use_bias=False)(x)
+    x = Dense(num_classes, activation='relu', use_bias=False)(x)
     output = Activation('softmax', name='predictions')(x)
     
     model = Model(img_input, output)
