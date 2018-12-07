@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return redirect("https://ekholabs.ai", code=302)
+    return redirect("http://localhost:8084", code=302)
 
 @app.route('/classifyImage', methods=['POST'])
 def upload():
